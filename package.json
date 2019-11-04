@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/pqt/colorize-foreground.git"
+    "url": "ssh://git@github.com/pqt/foreground.git"
   },
   "author": "Austin Paquette <austin@paquette.io>",
   "license": "MIT",
