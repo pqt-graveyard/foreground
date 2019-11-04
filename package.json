@@ -1,0 +1,25 @@
+{
+  "name": "@pqt/foreground",
+  "version": "0.0.0",
+  "description": "Validate a hexadecimal value, Convert hexadecimal to HSL, determine if the colour needs a light or dark foreground. ",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/pqt/colorize-foreground.git"
+  },
+  "author": "Austin Paquette <austin@paquette.io>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc",
+    "commit": "npx git-cz",
+    "cz": "npm run commit",
+    "dev": "tsc -w",
+    "format": "echo \"Add prettier format! -> @pqt/foreground\"",
+    "lint": "echo \"Add linter! -> @pqt/foreground\"",
+    "test": "echo \"Write tests! -> @pqt/foreground\""
+  },
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}
