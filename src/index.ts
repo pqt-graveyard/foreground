@@ -6,16 +6,12 @@ export const expandHexadecimal = (color: string) => {
   const colorWithoutHash = removeHash(color);
   const valid = isValidHexadecimal(colorWithoutHash);
 
-  if (!valid) {
-    throw "Invalid Hexidecimal";
-  }
-
-  if (colorWithoutHash.length !== 3) {
+  if (valid && colorWithoutHash.length === 3) {
+    const [red, blue, green] = colorWithoutHash.split("");
+    return [red, red, blue, blue, green, green].join("");
+  } else {
     throw "Invalid Hexidecimal Shorthand Length";
   }
-
-  const [red, blue, green] = colorWithoutHash.split("");
-  return [red, red, blue, blue, green, green].join("");
 };
 
 export const parseHexadecimal = (color: string) => {
