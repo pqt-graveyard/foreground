@@ -1,0 +1,46 @@
+name: CI
+on: push
+
+jobs:
+  npm:
+    name: "Publish"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
+
+      - name: install
+        run: npm install
+
+      - name: format
+        run: npm run format
+
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: npm run test
+
+      - name: build
+        run: npm run build
+
+      # - name: prepublish
+      #   run: scripts/prepublish
+
+      - name: publish (npm)
+        uses: primer/publish@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: publish (gpr)
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

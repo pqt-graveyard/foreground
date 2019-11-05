@@ -1,0 +1,15 @@
+# Dependancies
+node_modules/
+
+# Log Files
+*.log
+
+# NPM Ignore Specific
+# Source Files
+src/
+
+# Compiler Config
+tsconfig.json
+
+# Dotfiles
+.*
