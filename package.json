@@ -1,6 +1,6 @@
 {
   "name": "@pqt/foreground",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validate a hexadecimal value, Convert hexadecimal to HSL, determine if the colour needs a light or dark foreground. ",
   "main": "dist/index.js",
   "repository": {
