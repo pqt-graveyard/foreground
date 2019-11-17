@@ -5,9 +5,6 @@
 <h3 align="center">
   🎨 📦 💄
 </h3>
-<h3 align="center">
-  Focus on the background, I'll do the foreground.
-</h3>
 <p align="center">
   Validate a hexadecimal value, Convert hexadecimal to HSL, determine if the colour needs a light or dark foreground.
 </p>
