@@ -1,12 +1,5 @@
+# Build Files
+build
+
 # Dependancies
-node_modules/
-
-# Log Files
-*.log
-
-# Git Ignore Specific
-# Dot Files
-.DS_Store
-
-# Built Files
-dist/
+node_modules

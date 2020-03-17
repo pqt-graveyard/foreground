@@ -1,8 +1,8 @@
-export const removeHash = (color: string) => {
+const removeHash = (color: string) => {
   return color.replace(/#/g, "");
 };
 
-export const expandHexadecimal = (color: string) => {
+const expandHexadecimal = (color: string) => {
   const colorWithoutHash = removeHash(color);
   const valid = isValidHexadecimal(colorWithoutHash);
 
@@ -14,7 +14,7 @@ export const expandHexadecimal = (color: string) => {
   }
 };
 
-export const parseHexadecimal = (color: string) => {
+const parseHexadecimal = (color: string) => {
   let colorWithoutHash = removeHash(color);
 
   if (colorWithoutHash.length === 3) {
@@ -28,7 +28,7 @@ export const parseHexadecimal = (color: string) => {
   }
 };
 
-export const isValidHexadecimal = (color: string) => {
+const isValidHexadecimal = (color: string) => {
   const colorWithoutHash = removeHash(color);
   const valid = /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(colorWithoutHash);
 
@@ -39,7 +39,7 @@ export const isValidHexadecimal = (color: string) => {
   }
 };
 
-export const convertHexadecimalToHSL = (color: string) => {
+const convertHexadecimalToHSL = (color: string) => {
   const colorWithoutHash = removeHash(color);
   const hex = parseHexadecimal(colorWithoutHash)!;
 
@@ -84,18 +84,23 @@ export const convertHexadecimalToHSL = (color: string) => {
   return [hue, saturation, lightness];
 };
 
-export const foreground = (color: string, threshold = 75) => {
-  const colorWithoutHash = removeHash(color);
-  const valid = isValidHexadecimal(colorWithoutHash);
+export const foreground = (color: string, threshold = 65) => {
+  if (typeof color !== "string") {
+    throw new TypeError("Color parameter must be a string");
+  }
+  if (typeof threshold !== "number") {
+    throw new TypeError("Threshold parameter must be a number");
+  }
+
+  color = removeHash(color);
+
+  const valid = isValidHexadecimal(color);
 
   if (valid) {
-    const [_, __, lightness] = convertHexadecimalToHSL(colorWithoutHash);
+    const lightness = convertHexadecimalToHSL(color)[2];
 
-    return {
-      color: lightness > threshold ? "000000" : "ffffff",
-      type: lightness > threshold ? "dark" : "light"
-    };
-  } else {
-    throw "Could not determine how to colorize the foreground.";
+    return lightness > threshold ? "dark" : "light";
   }
 };
+
+export default foreground;
