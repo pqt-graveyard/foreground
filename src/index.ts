@@ -1,47 +1,60 @@
 const removeHash = (color: string) => {
+  if (typeof color !== "string") {
+    throw new TypeError("Color parameter must be a string");
+  }
+
   return color.replace(/#/g, "");
 };
 
-const expandHexadecimal = (color: string) => {
-  const colorWithoutHash = removeHash(color);
-  const valid = isValidHexadecimal(colorWithoutHash);
+// const isValidHexadecimal = (color: string) => {
+//   if (typeof color !== "string") {
+//     throw new TypeError("Color parameter must be a string");
+//   }
 
-  if (valid && colorWithoutHash.length === 3) {
-    const [red, blue, green] = colorWithoutHash.split("");
-    return [red, red, blue, blue, green, green].join("");
-  } else {
-    throw "Invalid Hexidecimal Shorthand Length";
+//   color = removeHash(color);
+
+//   return /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(color);
+// };
+
+const expandHexadecimal = (color: string) => {
+  if (typeof color !== "string") {
+    throw new TypeError("Color parameter must be a string");
   }
+  color = removeHash(color);
+
+  // TODO: Fail if invalid
+  // const valid = isValidHexadecimal(color);
+
+  const [red, blue, green] = color.split("");
+  return [red, red, blue, blue, green, green].join("");
 };
 
 const parseHexadecimal = (color: string) => {
-  let colorWithoutHash = removeHash(color);
-
-  if (colorWithoutHash.length === 3) {
-    colorWithoutHash = expandHexadecimal(colorWithoutHash);
+  if (typeof color !== "string") {
+    throw new TypeError("Color parameter must be a string");
   }
 
-  if (colorWithoutHash.length === 6) {
-    return /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(colorWithoutHash);
-  } else {
-    throw "Failed to Parse Hexidecimal value into a RegExpExecArray type";
-  }
-};
+  color = removeHash(color);
 
-const isValidHexadecimal = (color: string) => {
-  const colorWithoutHash = removeHash(color);
-  const valid = /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(colorWithoutHash);
-
-  if (valid) {
-    return true;
-  } else {
-    return false;
+  if (color.length === 3) {
+    color = expandHexadecimal(color);
   }
+
+  // TODO: Fail if not 6 characters long
+  // if (color.length !== 6) {
+
+  // }
+
+  return /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
 };
 
 const convertHexadecimalToHSL = (color: string) => {
-  const colorWithoutHash = removeHash(color);
-  const hex = parseHexadecimal(colorWithoutHash)!;
+  color = removeHash(color);
+  const hex = parseHexadecimal(color);
+
+  if (!hex) {
+    return;
+  }
 
   const [red, green, blue] = [
     parseInt(hex[1], 16) / 255,
@@ -94,13 +107,12 @@ export const foreground = (color: string, threshold = 65) => {
 
   color = removeHash(color);
 
-  const valid = isValidHexadecimal(color);
+  // TODO: fail if invalid
+  // const valid = isValidHexadecimal(color);
 
-  if (valid) {
-    const lightness = convertHexadecimalToHSL(color)[2];
+  const lightness = convertHexadecimalToHSL(color)[2];
 
-    return lightness > threshold ? "dark" : "light";
-  }
+  return lightness > threshold ? "dark" : "light";
 };
 
 export default foreground;
