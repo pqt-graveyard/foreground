@@ -1,45 +1,29 @@
-# Introduction
+<h1 align="center">
+  @pqt/foreground
+</h1>
 
-Abbreviate numbers in the Thousands (K), Millions (M), Billions (B) and Trillions (T)
+<h3 align="center">
+Determine whether a given background color will need a light or dark foreground
+</h3>
 
 ## Installation
 
 ```
-npm install @pqt/abbreviate
+npm install @pqt/foreground
 # OR
-yarn add @pqt/abbreviate
+yarn add @pqt/foreground
 ```
 
 ## Usage
 
 ```js
-import { abbreviate } from "@pqt/abbreviate";
+import { foreground } from "@pqt/foreground";
 
-// Thousands
-abbreviate(1234); // => 1K
-abbreviate(1234, 1); // => 1.2K
-abbreviate(1234, 2); // => 1.23K
-abbreviate(1234, 3); // => 1.234K
-
-// Millions
-abbreviate(1234123); // => 1M
-abbreviate(1234123, 1); // => 1.2M
-abbreviate(1234123, 2); // => 1.23M
-abbreviate(1234123, 3); // => 1.234M
-
-// Billions
-abbreviate(1234123412); // => 1B
-abbreviate(1234123412, 1); // => 1.2B
-abbreviate(1234123412, 2); // => 1.23B
-abbreviate(1234123412, 3); // => 1.234B
-
-// Trillions
-abbreviate(1234123412); // => 1T
-abbreviate(1234123412, 1); // => 1.2T
-abbreviate(1234123412, 2); // => 1.23T
-abbreviate(1234123412, 3); // => 1.234T
-```
+foreground("fff")     // => returns "dark"
+foreground("000")     // => returns "light"
+foreground("005cc5")  // => returns "light"
 
 ## License
 
 MIT
+```
