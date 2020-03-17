@@ -1,8 +1,4 @@
 const removeHash = (color: string) => {
-  if (typeof color !== "string") {
-    throw new TypeError("Color parameter must be a string");
-  }
-
   return color.replace(/#/g, "");
 };
 
@@ -17,44 +13,25 @@ const removeHash = (color: string) => {
 // };
 
 const expandHexadecimal = (color: string) => {
-  if (typeof color !== "string") {
-    throw new TypeError("Color parameter must be a string");
-  }
   color = removeHash(color);
-
-  // TODO: Fail if invalid
-  // const valid = isValidHexadecimal(color);
 
   const [red, blue, green] = color.split("");
   return [red, red, blue, blue, green, green].join("");
 };
 
 const parseHexadecimal = (color: string) => {
-  if (typeof color !== "string") {
-    throw new TypeError("Color parameter must be a string");
-  }
-
   color = removeHash(color);
 
   if (color.length === 3) {
     color = expandHexadecimal(color);
   }
 
-  // TODO: Fail if not 6 characters long
-  // if (color.length !== 6) {
-
-  // }
-
   return /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
 };
 
 const convertHexadecimalToHSL = (color: string) => {
   color = removeHash(color);
-  const hex = parseHexadecimal(color);
-
-  if (!hex) {
-    throw TypeError("Parsed Color Cannot be null");
-  }
+  const hex = parseHexadecimal(color)!;
 
   const [red, green, blue] = [
     parseInt(hex[1], 16) / 255,
@@ -98,17 +75,10 @@ const convertHexadecimalToHSL = (color: string) => {
 };
 
 export const foreground = (color: string, threshold = 65) => {
-  if (typeof color !== "string") {
-    throw new TypeError("Color parameter must be a string");
-  }
-  if (typeof threshold !== "number") {
-    throw new TypeError("Threshold parameter must be a number");
-  }
-
   color = removeHash(color);
 
-  // TODO: fail if invalid
-  // const valid = isValidHexadecimal(color);
+  // // TODO: fail if invalid
+  // // const valid = isValidHexadecimal(color);
 
   const lightness = convertHexadecimalToHSL(color)[2];
 

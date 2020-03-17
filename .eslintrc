@@ -19,5 +19,13 @@
       2 = error
     */
     "@typescript-eslint/explicit-function-return-type": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["./src/index.ts"],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    }
+  ]
 }
