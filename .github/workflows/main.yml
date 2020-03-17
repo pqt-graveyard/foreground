@@ -3,13 +3,13 @@ on: push
 
 jobs:
   npm:
-    name: "Publish"
+    name: Publish to NPM
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
         with:
-          node-version: 12
+          node-version: "12.x"
 
       - name: install
         run: npm install
@@ -26,21 +26,9 @@ jobs:
       - name: build
         run: npm run build
 
-      # - name: prepublish
-      #   run: scripts/prepublish
-
       - name: publish (npm)
-        uses: primer/publish@master
+        uses: primer/publish@v2.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
-      - uses: actions/setup-node@master
-        with:
-          node-version: 12
-          registry-url: "https://npm.pkg.github.com"
-
-      - name: publish (gpr)
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          args: "--dry-run -- --unsafe-perm"

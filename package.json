@@ -1,25 +1,53 @@
 {
   "name": "@pqt/foreground",
-  "version": "1.0.2",
-  "description": "Validate a hexadecimal value, Convert hexadecimal to HSL, determine if the colour needs a light or dark foreground. ",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com/pqt/foreground.git"
-  },
+  "version": "1.0.3",
+  "description": "Determine whether a given background color will need a light or dark foreground",
   "author": "Austin Paquette <austin@paquette.io>",
-  "license": "MIT",
-  "private": false,
+  "keywords": [],
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "commit": "npx git-cz",
-    "cz": "npm run commit",
-    "dev": "tsc -w",
-    "format": "echo \"Add prettier format! -> @pqt/foreground\"",
-    "lint": "echo \"Add linter! -> @pqt/foreground\"",
-    "test": "echo \"Write tests! -> @pqt/foreground\""
+    "build": "rimraf build && tsc",
+    "dev": "rimraf build && tsc --watch",
+    "format": "prettier ./{src,__{tests,mocks}__}/{**,**/**}/*.{js,jsx,ts,tsx} --write",
+    "lint": "eslint src --ext=\".js,.jsx,.ts,.tsx\"",
+    "test": "jest"
   },
   "devDependencies": {
-    "typescript": "^3.6.4"
-  }
+    "@types/jest": "^25.1.4",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pqt/foreground"
+  },
+  "bugs": {
+    "url": "https://github.com/pqt/foreground/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run format && npm run lint && npm run test"
+    }
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    }
+  },
+  "license": "MIT"
 }

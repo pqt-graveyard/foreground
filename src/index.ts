@@ -1,47 +1,27 @@
-export const removeHash = (color: string) => {
+const removeHash = (color: string) => {
   return color.replace(/#/g, "");
 };
 
-export const expandHexadecimal = (color: string) => {
-  const colorWithoutHash = removeHash(color);
-  const valid = isValidHexadecimal(colorWithoutHash);
+const expandHexadecimal = (color: string) => {
+  color = removeHash(color);
 
-  if (valid && colorWithoutHash.length === 3) {
-    const [red, blue, green] = colorWithoutHash.split("");
-    return [red, red, blue, blue, green, green].join("");
-  } else {
-    throw "Invalid Hexidecimal Shorthand Length";
-  }
+  const [red, blue, green] = color.split("");
+  return [red, red, blue, blue, green, green].join("");
 };
 
-export const parseHexadecimal = (color: string) => {
-  let colorWithoutHash = removeHash(color);
+const parseHexadecimal = (color: string) => {
+  color = removeHash(color);
 
-  if (colorWithoutHash.length === 3) {
-    colorWithoutHash = expandHexadecimal(colorWithoutHash);
+  if (color.length === 3) {
+    color = expandHexadecimal(color);
   }
 
-  if (colorWithoutHash.length === 6) {
-    return /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(colorWithoutHash);
-  } else {
-    throw "Failed to Parse Hexidecimal value into a RegExpExecArray type";
-  }
+  return /([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
 };
 
-export const isValidHexadecimal = (color: string) => {
-  const colorWithoutHash = removeHash(color);
-  const valid = /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(colorWithoutHash);
-
-  if (valid) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-export const convertHexadecimalToHSL = (color: string) => {
-  const colorWithoutHash = removeHash(color);
-  const hex = parseHexadecimal(colorWithoutHash)!;
+const convertHexadecimalToHSL = (color: string) => {
+  color = removeHash(color);
+  const hex = parseHexadecimal(color)!;
 
   const [red, green, blue] = [
     parseInt(hex[1], 16) / 255,
@@ -84,18 +64,12 @@ export const convertHexadecimalToHSL = (color: string) => {
   return [hue, saturation, lightness];
 };
 
-export const foreground = (color: string, threshold = 75) => {
-  const colorWithoutHash = removeHash(color);
-  const valid = isValidHexadecimal(colorWithoutHash);
+export const foreground = (color: string, threshold = 65) => {
+  color = removeHash(color);
 
-  if (valid) {
-    const [_, __, lightness] = convertHexadecimalToHSL(colorWithoutHash);
+  const lightness = convertHexadecimalToHSL(color)[2];
 
-    return {
-      color: lightness > threshold ? "000000" : "ffffff",
-      type: lightness > threshold ? "dark" : "light"
-    };
-  } else {
-    throw "Could not determine how to colorize the foreground.";
-  }
+  return lightness > threshold ? "dark" : "light";
 };
+
+export default foreground;
