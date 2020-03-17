@@ -2,16 +2,6 @@ const removeHash = (color: string) => {
   return color.replace(/#/g, "");
 };
 
-// const isValidHexadecimal = (color: string) => {
-//   if (typeof color !== "string") {
-//     throw new TypeError("Color parameter must be a string");
-//   }
-
-//   color = removeHash(color);
-
-//   return /(^[0-9A-F]{6}$)|(^[0-9A-F]{3}$)/i.test(color);
-// };
-
 const expandHexadecimal = (color: string) => {
   color = removeHash(color);
 
@@ -76,9 +66,6 @@ const convertHexadecimalToHSL = (color: string) => {
 
 export const foreground = (color: string, threshold = 65) => {
   color = removeHash(color);
-
-  // // TODO: fail if invalid
-  // // const valid = isValidHexadecimal(color);
 
   const lightness = convertHexadecimalToHSL(color)[2];
 
