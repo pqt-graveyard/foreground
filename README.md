@@ -40,11 +40,11 @@ yarn add @pqt/foreground
 ```js
 import { foreground } from "@pqt/foreground";
 
-foreground("fff")     // => returns "dark"
-foreground("000")     // => returns "light"
-foreground("005cc5")  // => returns "light"
+foreground("fff"); // => returns "dark"
+foreground("000"); // => returns "light"
+foreground("005cc5"); // => returns "light"
+```
 
 ## License
 
 MIT
-```
