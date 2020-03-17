@@ -1,6 +1,6 @@
 {
   "name": "@pqt/foreground",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Determine whether a given background color will need a light or dark foreground",
   "author": "Austin Paquette <austin@paquette.io>",
   "keywords": [],
