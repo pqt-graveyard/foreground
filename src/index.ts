@@ -53,7 +53,7 @@ const convertHexadecimalToHSL = (color: string) => {
   const hex = parseHexadecimal(color);
 
   if (!hex) {
-    return;
+    throw TypeError("Parsed Color Cannot be null");
   }
 
   const [red, green, blue] = [
