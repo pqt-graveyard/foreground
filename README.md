@@ -1,43 +1,48 @@
-# Introduction
+<h1 align="center">
+  foreground
+</h1>
 
-Abbreviate numbers in the Thousands (K), Millions (M), Billions (B) and Trillions (T)
+<h3 align="center">
+Determine whether a given background color will need a light or dark foreground
+</h3>
+
+<p align="center">
+  <a href="https://www.npmjs.org/package/@pqt/foreground">
+    <img src="https://img.shields.io/npm/v/@pqt/foreground.svg" alt="Current npm package version." />
+  </a>
+  <a href="https://github.com/pqt/foreground/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Released under the MIT license." />
+  </a>
+  <a href="https://github.com/pqt/foreground/actions?workflow=status">
+    <img src="https://github.com/pqt/foreground/workflows/status/badge.svg" alt="Current Github Action build status." />
+  </a>
+  <a href="https://npmcharts.com/compare/@pqt/foreground?minimal=true">
+    <img src="https://img.shields.io/npm/dm/@pqt/foreground.svg" alt="Downloads per month on npm." />
+  </a>
+  <a href="https://npmcharts.com/compare/@pqt/foreground?minimal=true">
+    <img src="https://img.shields.io/npm/dt/@pqt/foreground.svg" alt="Total downloads on npm." />
+  </a>
+  <a href="https://twitter.com/intent/follow?screen_name=pqtdev">
+    <img src="https://img.shields.io/twitter/follow/pqtdev.svg?label=Follow%20@pqtdev" alt="Follow @pqtdev" />
+  </a>
+</p>
 
 ## Installation
 
 ```
-npm install @pqt/abbreviate
+npm install @pqt/foreground
 # OR
-yarn add @pqt/abbreviate
+yarn add @pqt/foreground
 ```
 
 ## Usage
 
 ```js
-import { abbreviate } from "@pqt/abbreviate";
+import { foreground } from "@pqt/foreground";
 
-// Thousands
-abbreviate(1234); // => 1K
-abbreviate(1234, 1); // => 1.2K
-abbreviate(1234, 2); // => 1.23K
-abbreviate(1234, 3); // => 1.234K
-
-// Millions
-abbreviate(1234123); // => 1M
-abbreviate(1234123, 1); // => 1.2M
-abbreviate(1234123, 2); // => 1.23M
-abbreviate(1234123, 3); // => 1.234M
-
-// Billions
-abbreviate(1234123412); // => 1B
-abbreviate(1234123412, 1); // => 1.2B
-abbreviate(1234123412, 2); // => 1.23B
-abbreviate(1234123412, 3); // => 1.234B
-
-// Trillions
-abbreviate(1234123412); // => 1T
-abbreviate(1234123412, 1); // => 1.2T
-abbreviate(1234123412, 2); // => 1.23T
-abbreviate(1234123412, 3); // => 1.234T
+foreground("fff"); // => returns "dark"
+foreground("000"); // => returns "light"
+foreground("005cc5"); // => returns "light"
 ```
 
 ## License
